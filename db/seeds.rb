@@ -3,11 +3,12 @@ require_relative('../models/nutrient')
 require_relative('../models/food')
 require_relative('../models/nutrient_level')
 require_relative('../models/consumed_food')
-
+require 'date'
 # Mealtime.delete_all
 # Nutrient.delete_all
 # Food.delete_all
 # NutrientLevel.delete_all
+# ConsumedFood.delete_all
 
 # mealtime1 = Mealtime.new({ 'name' => 'Breakfast'})
 # mealtime2 = Mealtime.new({ 'name' => 'Mid-morning snack'})
@@ -110,3 +111,33 @@ require_relative('../models/consumed_food')
 # food28.save
 
 # nutrientlevel1 = NutrientLevel.new({'foods_id' => 8, 'nutrients_id' => 2, 'nutrient_level' => 1.333})
+
+consumedfood1 = ConsumedFood.new({'foods_id' => 9, 'mealtimes_id'=> 1, 'quantity' => 100})
+consumedfood1.save
+
+consumedfood2 = ConsumedFood.new({'foods_id' => 9, 'mealtimes_id'=> 1, 'quantity' => 200})
+consumedfood2.save
+
+consumedfood3 = ConsumedFood.new({'foods_id' => 9, 'mealtimes_id'=> 1, 'quantity' => 50})
+consumedfood3.save
+
+# consumedfood1.quantity = 80
+# consumedfood1.update
+# puts ConsumedFood.find(consumedfood1.id)
+#
+# puts "all all all all all all all all"
+# puts ConsumedFood.all
+
+# puts ConsumedFood.nutrients(consumedfood1.foods_id)[0].name
+
+consumedfood1.nutrients_by_qty.each do |nutrient|
+  puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
+end
+
+consumedfood3.nutrients_by_qty.each do |nutrient|
+  puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
+end
+
+# consumedfood3.nutrients.each do |nutrient|
+#   puts "Contains #{nutrient.name}: #{nutrient.nutrient_level}"
+# end

@@ -34,6 +34,5 @@ CREATE TABLE consumed_foods (
     id SERIAL PRIMARY KEY,
     foods_id INT REFERENCES foods(id) ON DELETE CASCADE,
     mealtimes_id INT REFERENCES mealtimes(id) ON DELETE CASCADE,
-    quantity INT,
-    date_consumed DATE DEFAULT CURRENT_DATE
+    quantity INT
 );

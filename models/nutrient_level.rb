@@ -64,4 +64,27 @@ class NutrientLevel
     result = NutrientLevel.new( nutrient_level.first )
     return result
   end
+
+  def name
+    sql = "SELECT nutrients.* FROM nutrient_levels
+          INNER JOIN nutrients
+          ON nutrients.id = nutrient_levels.nutrients_id
+          WHERE nutrient_levels.nutrients_id = $1
+          GROUP BY nutrients.id"
+    values = [@nutrients_id]
+    nutrient = SqlRunner.run( sql, values )
+    result = Nutrient.new( nutrient.first )
+    return result.name
+  end
+  # def self.name(id)
+  #   sql = "SELECT nutrient.* FROM nutrient_levels
+  #         INNER JOIN nutrients
+  #         ON nutrients.id = nutrient_levels.nutrients_id
+  #         WHERE nutrient_levels.nutrients_id = $1
+  #         GROUP BY nutrients.id"
+  #   values = [id]
+  #   nutrient = SqlRunner.run( sql, values )
+  #   result = Nutrient.new( nutrient.first )
+  #   return result
+  # end
 end
