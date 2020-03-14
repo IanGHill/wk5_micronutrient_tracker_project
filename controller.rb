@@ -34,3 +34,8 @@ post '/food-diary/:id/delete' do
   consumed_food.delete()
   redirect to "/food-diary"
 end
+
+get '/food-diary/new' do
+  #
+  erb(:new)
+end
