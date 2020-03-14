@@ -95,4 +95,31 @@ class ConsumedFood
     result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
   end
 
+  def self.nutrients_total
+    sql = "SELECT nutrients.id,
+		              nutrients.name,
+                  nutrients.type,
+                  nutrients.rda,
+                  nutrients.uom,
+                  SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
+                  AS nutrient_level,
+                  SUM (100 * nutrient_level / rda)
+                  AS percentage_rda
+           FROM consumed_foods
+           INNER JOIN nutrient_levels
+           ON consumed_foods.foods_id = nutrient_levels.foods_id
+           INNER JOIN nutrients
+           ON nutrients.id = nutrient_levels.nutrients_id
+           GROUP BY nutrients.id,
+                    nutrients.name,
+                    nutrients.type,
+                    nutrients.rda,
+                    nutrients.uom
+           ORDER BY nutrients.id"
+    total_nutrients = SqlRunner.run(sql)
+    return total_nutrients
+  end
+
+
+
 end
