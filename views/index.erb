@@ -1,6 +1,49 @@
-<h1>Micronutrient Tracker</h1>
+<h2>VEGAN WHOLEFOOD MICRONUTRIENT TRACKER</h2>
 
-<p><% @total_nutrients %></p>
+
+<form method="post" action="/food-diary">
+
+  <label for="mealtime-select">Select Mealtime:</label>
+    <select id="mealtime_select" name="mealtimes_id">
+      <% @all_mealtimes.each do |mealtime| %>
+          <option value=<%= mealtime.id %>><%= mealtime.name %></option>
+      <% end %>
+    </select>
+
+  <label for="food-select">Select Food:</label>
+    <select id="food_select" name="foods_id">
+      <% @all_foods.each do |food| %>
+          <option value=<%= food.id %>><%= food.name %></option>
+      <% end %>
+    </select>
+
+    <label for="quantity">Quantity(g)</label>
+      <input type="number" id="quantity" name="quantity">
+
+    <input type="submit" value="Enter Food">
+
+</form>
+
+
+
+<hr>
+<table>
+  <tr>
+    <th>Mealtime</th>
+    <th>Food</th>
+    <th>Quantity</th>
+  </tr>
+  <% for food in @all_meals %>
+  <tr>
+    <td><%= food['mealtime_name'] %></td>
+    <td><%= food['food_name'] %></td>
+    <td><%= "#{food['quantity'].to_s}g"  %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<hr>
+
 
 <hr>
 <table>
@@ -14,7 +57,7 @@
   <tr>
     <td><%= mineral['name'] %></td>
     <td><%= "#{mineral['rda']}#{mineral['uom']}"  %></td>
-    <td><%= "#{mineral['nutrient_level'].to_f.round(2)}#{mineral['uom']}"  %></td>
+    <td><%= "#{mineral['total_nutrient_level'].to_f.round(2)}#{mineral['uom']}"  %></td>
     <td><%= mineral['percentage_rda'].to_f.round %></td>
   </tr>
   <% end %>
@@ -32,7 +75,7 @@
   <tr>
     <td><%= vitamin['name'] %></td>
     <td><%= "#{vitamin['rda']}#{vitamin['uom']}"  %></td>
-    <td><%= "#{vitamin['nutrient_level'].to_f.round(2)}#{vitamin['uom']}"  %></td>
+    <td><%= "#{vitamin['total_nutrient_level'].to_f.round(2)}#{vitamin['uom']}"  %></td>
     <td><%= vitamin['percentage_rda'].to_f.round %></td>
   </tr>
   <% end %>

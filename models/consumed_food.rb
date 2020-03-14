@@ -51,10 +51,27 @@ class ConsumedFood
   end
 
   def self.all()
-    sql = "SELECT * FROM consumed_foods"
+    sql = "SELECT  *
+          FROM     consumed_foods
+          ORDER BY id"
     consumed_foods = SqlRunner.run( sql )
     result = consumed_foods.map { |consumed_food| ConsumedFood.new( consumed_food ) }
     return result
+  end
+
+  def self.all_meal_details()
+    sql = "SELECT    mealtimes.name AS mealtime_name,
+		                 foods.name     AS food_name,
+		                 foods.type,
+		                 consumed_foods.quantity
+          FROM       consumed_foods
+          INNER JOIN mealtimes
+          ON         mealtimes.id = consumed_foods.mealtimes_id
+          INNER JOIN foods
+          ON         foods.id = consumed_foods.foods_id
+          ORDER BY   mealtimes_id, consumed_foods.id"
+    consumed_foods = SqlRunner.run( sql )
+    return consumed_foods
   end
 
   def self.find( id )
@@ -102,9 +119,9 @@ class ConsumedFood
                   nutrients.type,
                   nutrients.rda,
                   nutrients.uom,
-                  SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
-                  AS nutrient_level,
-                  SUM (100 * nutrient_level / rda)
+                  (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
+                  AS total_nutrient_level,
+    			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
                   AS percentage_rda
            FROM consumed_foods
            INNER JOIN nutrient_levels
@@ -125,11 +142,12 @@ class ConsumedFood
     def self.nutrients_total_minerals
       sql = "SELECT nutrients.id,
   		              nutrients.name,
+                    nutrients.type,
                     nutrients.rda,
                     nutrients.uom,
-                    SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
-                    AS nutrient_level,
-                    SUM (100 * nutrient_level / rda)
+                    (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
+                    AS total_nutrient_level,
+      			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
                     AS percentage_rda
              FROM consumed_foods
              INNER JOIN nutrient_levels
@@ -139,6 +157,7 @@ class ConsumedFood
              WHERE nutrients.type = 'mineral'
              GROUP BY nutrients.id,
                       nutrients.name,
+                      nutrients.type,
                       nutrients.rda,
                       nutrients.uom
              ORDER BY nutrients.id"
@@ -149,12 +168,13 @@ class ConsumedFood
     # Brings back complete VITAMIN nutritional information for all of the foods consumed
       def self.nutrients_total_vitamins
         sql = "SELECT nutrients.id,
-                      nutrients.name,
+    		              nutrients.name,
+                      nutrients.type,
                       nutrients.rda,
                       nutrients.uom,
-                      SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
-                      AS nutrient_level,
-                      SUM (100 * nutrient_level / rda)
+                      (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
+                      AS total_nutrient_level,
+        			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
                       AS percentage_rda
                FROM consumed_foods
                INNER JOIN nutrient_levels
@@ -164,6 +184,7 @@ class ConsumedFood
                WHERE nutrients.type = 'vitamin'
                GROUP BY nutrients.id,
                         nutrients.name,
+                        nutrients.type,
                         nutrients.rda,
                         nutrients.uom
                ORDER BY nutrients.id"
