@@ -60,7 +60,8 @@ class ConsumedFood
   end
 
   def self.all_meal_details()
-    sql = "SELECT    mealtimes.name AS mealtime_name,
+    sql = "SELECT    consumed_foods.id,
+                     mealtimes.name AS mealtime_name,
 		                 foods.name     AS food_name,
 		                 foods.type,
 		                 consumed_foods.quantity

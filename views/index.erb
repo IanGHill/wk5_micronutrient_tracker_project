@@ -18,33 +18,38 @@
     </select>
 
     <label for="quantity">Quantity(g)</label>
-      <input type="number" id="quantity" name="quantity">
+      <input type="number" id="quantity" name="quantity" required min = 1 >
 
     <input type="submit" value="Enter Food">
 
 </form>
 
-
-
 <hr>
-<table>
-  <tr>
-    <th>Mealtime</th>
-    <th>Food</th>
-    <th>Quantity</th>
-  </tr>
-  <% for food in @all_meals %>
-  <tr>
-    <td><%= food['mealtime_name'] %></td>
-    <td><%= food['food_name'] %></td>
-    <td><%= "#{food['quantity'].to_s}g"  %></td>
-  </tr>
-  <% end %>
-</table>
+
+
+
+  <table>
+    <tr>
+      <th>Mealtime</th>
+      <th>Food</th>
+      <th>Quantity</th>
+    </tr>
+    <% for food in @all_meals %>
+    <tr>
+      <td><%= food['mealtime_name'] %></td>
+      <td><%= food['food_name'] %></td>
+      <td><%= "#{food['quantity'].to_s}g"  %></td>
+      <td><form method="post" action="/food-diary/<%= "#{food['id']}" %>/delete">
+            <input type="submit" value="Delete Food">
+          </form>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
 <br>
+
 <hr>
-
-
 <hr>
 <table>
   <tr>

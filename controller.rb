@@ -27,3 +27,10 @@ post '/food-diary' do
   @consumed_food.save
   redirect to "/food-diary"
 end
+
+post '/food-diary/:id/delete' do
+  # binding.pry
+  consumed_food = ConsumedFood.find(params[:id])
+  consumed_food.delete()
+  redirect to "/food-diary"
+end
