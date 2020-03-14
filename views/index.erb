@@ -1,0 +1,40 @@
+<h1>Micronutrient Tracker</h1>
+
+<p><% @total_nutrients %></p>
+
+<hr>
+<table>
+  <tr>
+    <th>Mineral</th>
+    <th>RDA</th>
+    <th>My Total</th>
+    <th>% RDA</th>
+  </tr>
+  <% for mineral in @total_minerals %>
+  <tr>
+    <td><%= mineral['name'] %></td>
+    <td><%= "#{mineral['rda']}#{mineral['uom']}"  %></td>
+    <td><%= "#{mineral['nutrient_level'].to_f.round(2)}#{mineral['uom']}"  %></td>
+    <td><%= mineral['percentage_rda'].to_f.round %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<hr>
+<table>
+  <tr>
+    <th>Vitamin</th>
+    <th>RDA</th>
+    <th>My Total</th>
+    <th>% RDA</th>
+  </tr>
+  <% for vitamin in @total_vitamins %>
+  <tr>
+    <td><%= vitamin['name'] %></td>
+    <td><%= "#{vitamin['rda']}#{vitamin['uom']}"  %></td>
+    <td><%= "#{vitamin['nutrient_level'].to_f.round(2)}#{vitamin['uom']}"  %></td>
+    <td><%= vitamin['percentage_rda'].to_f.round %></td>
+  </tr>
+  <% end %>
+</table>
+<hr>

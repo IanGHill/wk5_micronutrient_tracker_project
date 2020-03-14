@@ -134,20 +134,26 @@ consumedfood3.save
 
 # puts ConsumedFood.nutrients(consumedfood1.foods_id)[0].name
 
-consumedfood1.nutrients_by_qty.each do |nutrient|
-  puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
-end
-
-consumedfood2.nutrients_by_qty.each do |nutrient|
-  puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
-end
-
-consumedfood3.nutrients_by_qty.each do |nutrient|
-  puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
-end
+# consumedfood1.nutrients_by_qty.each do |nutrient|
+#   puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
+# end
+#
+# consumedfood2.nutrients_by_qty.each do |nutrient|
+#   puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
+# end
+#
+# consumedfood3.nutrients_by_qty.each do |nutrient|
+#   puts "Contains #{nutrient.name}: #{nutrient.nutrient_level.round(3)}"
+# end
 
 # consumedfood3.nutrients.each do |nutrient|
 #   puts "Contains #{nutrient.name}: #{nutrient.nutrient_level}"
 # end
 
-puts ConsumedFood.nutrients_total[0]
+# puts ConsumedFood.nutrients_total[0]
+#
+# puts Food.types[0]
+
+# puts Food.find_by_type('Fruit')[0].name
+
+puts ConsumedFood.nutrients_total_minerals[0]

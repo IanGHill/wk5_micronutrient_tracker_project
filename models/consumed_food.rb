@@ -95,6 +95,7 @@ class ConsumedFood
     result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
   end
 
+# Brings back complete nutritional information for all of the foods consumed
   def self.nutrients_total
     sql = "SELECT nutrients.id,
 		              nutrients.name,
@@ -119,6 +120,56 @@ class ConsumedFood
     total_nutrients = SqlRunner.run(sql)
     return total_nutrients
   end
+
+  # Brings back complete MINERAL nutritional information for all of the foods consumed
+    def self.nutrients_total_minerals
+      sql = "SELECT nutrients.id,
+  		              nutrients.name,
+                    nutrients.rda,
+                    nutrients.uom,
+                    SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
+                    AS nutrient_level,
+                    SUM (100 * nutrient_level / rda)
+                    AS percentage_rda
+             FROM consumed_foods
+             INNER JOIN nutrient_levels
+             ON consumed_foods.foods_id = nutrient_levels.foods_id
+             INNER JOIN nutrients
+             ON nutrients.id = nutrient_levels.nutrients_id
+             WHERE nutrients.type = 'mineral'
+             GROUP BY nutrients.id,
+                      nutrients.name,
+                      nutrients.rda,
+                      nutrients.uom
+             ORDER BY nutrients.id"
+      total_minerals = SqlRunner.run(sql)
+      return total_minerals
+    end
+
+    # Brings back complete VITAMIN nutritional information for all of the foods consumed
+      def self.nutrients_total_vitamins
+        sql = "SELECT nutrients.id,
+                      nutrients.name,
+                      nutrients.rda,
+                      nutrients.uom,
+                      SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100)
+                      AS nutrient_level,
+                      SUM (100 * nutrient_level / rda)
+                      AS percentage_rda
+               FROM consumed_foods
+               INNER JOIN nutrient_levels
+               ON consumed_foods.foods_id = nutrient_levels.foods_id
+               INNER JOIN nutrients
+               ON nutrients.id = nutrient_levels.nutrients_id
+               WHERE nutrients.type = 'vitamin'
+               GROUP BY nutrients.id,
+                        nutrients.name,
+                        nutrients.rda,
+                        nutrients.uom
+               ORDER BY nutrients.id"
+        total_minerals = SqlRunner.run(sql)
+        return total_minerals
+      end
 
 
 

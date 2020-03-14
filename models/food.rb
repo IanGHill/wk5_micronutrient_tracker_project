@@ -60,4 +60,20 @@ class Food
     result = Food.new( food.first )
     return result
   end
+
+# Used to find all of the different types of food categories (e.g. fruit | vegetables | grains | etc)
+  def self.types()
+    sql = "SELECT DISTINCT type FROM foods;"
+    types = SqlRunner.run(sql)
+    return types
+  end
+
+#  Used to find all of the available foods of a particular type (e.g. give me all varieties of fruit)
+  def self.find_by_type( type )
+    sql = "SELECT name FROM foods WHERE type = $1"
+    values = [type]
+    foods = SqlRunner.run( sql, values )
+    result = foods.map { |food| Food.new( food ) }
+    return result
+  end
 end

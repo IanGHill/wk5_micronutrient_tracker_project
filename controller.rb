@@ -9,9 +9,10 @@ require_relative('models/nutrient_level')
 require_relative('models/nutrient')
 also_reload('./models/*')
 
-get '/pizza-orders' do
+get '/food-diary' do
   # Should be the PizzaOrder.all method
   # Remnder some kind of view called index
-  @orders = PizzaOrder.all()
+  @total_minerals = ConsumedFood.nutrients_total_minerals
+  @total_vitamins = ConsumedFood.nutrients_total_vitamins
   erb(:index)
 end
