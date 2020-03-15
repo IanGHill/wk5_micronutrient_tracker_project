@@ -2,8 +2,7 @@ require_relative("../db/sql_runner")
 
 class FoodType
 
-  attr_reader :id
-  attr_accessor :name
+  attr_reader :id, :name
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -22,32 +21,40 @@ class FoodType
   end
 
   def update()
-    sql = "UPDATE food_types SET name = $1 WHERE id = $2"
+    sql = "UPDATE food_types
+           SET name = $1
+           WHERE id = $2"
     values = [@name, @id]
     SqlRunner.run( sql, values )
   end
 
   def self.delete_all()
-    sql = "DELETE FROM food_types;"
+    sql = "DELETE
+           FROM food_types;"
     SqlRunner.run(sql)
   end
 
   def delete()
-    sql = "DELETE FROM food_types
-    WHERE id = $1"
+    sql = "DELETE
+           FROM food_types
+           WHERE id = $1"
     values = [@id]
     SqlRunner.run( sql, values )
   end
 
   def self.all()
-    sql = "SELECT * FROM food_types"
+    sql = "SELECT *
+           FROM food_types
+           ORDER BY name"
     food_types = SqlRunner.run( sql )
     result = food_types.map { |food_type| FoodType.new( food_type ) }
     return result
   end
 
   def self.find( id )
-    sql = "SELECT * FROM food_types WHERE id = $1"
+    sql = "SELECT *
+           FROM food_types
+           WHERE id = $1"
     values = [id]
     food_type = SqlRunner.run( sql, values )
     result = FoodType.new( food_type.first )

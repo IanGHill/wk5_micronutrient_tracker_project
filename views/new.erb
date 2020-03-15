@@ -1,0 +1,29 @@
+
+<div class="container">
+  <form method="post" action="/food-diary/new">
+
+    <div class="row">
+        <label for="food-name">Food Name:</label>
+        <input type="text" id="food_name" name="name" placeholder="Enter Food Name" required >
+    </div>
+
+    <div class="row">
+        <label for="food-type-select">Select Food Type:</label>
+        <select id="food_type_select" name="food_types_id">
+          <% @all_food_types.each do |food_type| %>
+              <option value=<%= food_type.id %>><%= food_type.name %></option>
+          <% end %>
+        </select>
+    </div>
+
+    <% @all_nutrients.each do |nutrient| %>
+   <div class="row">
+     <label for="nutrient-name"> <%= "#{nutrient.name} (#{nutrient.uom})" %> </label>
+     <input type="number" id="nutrient_quantity" name="<%= nutrient.name %>" placeholder="Enter quantity" required step = "0.001" min = 0 >
+   </div>
+ <% end %>
+
+      <input type="submit" value="Add New Food">
+
+  </form>
+</div>

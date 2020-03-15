@@ -54,7 +54,8 @@ class Nutrient
   end
 
   def self.all()
-    sql = "SELECT * FROM nutrients"
+    sql = "SELECT * FROM nutrients
+            ORDER BY type, id"
     nutrients = SqlRunner.run( sql )
     result = nutrients.map { |nutrient| Nutrient.new( nutrient ) }
     return result
