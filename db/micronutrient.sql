@@ -1,13 +1,14 @@
 DROP TABLE IF EXISTS consumed_foods;
 DROP TABLE IF EXISTS nutrient_levels;
+DROP TABLE IF EXISTS foods;
 DROP TABLE IF EXISTS nutrients;
 DROP TABLE IF EXISTS mealtimes;
-DROP TABLE IF EXISTS foods;
+DROP TABLE IF EXISTS food_types;
 
-CREATE TABLE foods (
+
+CREATE TABLE food_types (
     id SERIAL PRIMARY KEY,
-    name VARCHAR (255),
-    type VARCHAR (255)
+    name VARCHAR (255)
 );
 
 CREATE TABLE mealtimes (
@@ -21,6 +22,12 @@ CREATE TABLE nutrients (
     rda FLOAT(3),
     uom VARCHAR (255),
     type VARCHAR(255)
+);
+
+CREATE TABLE foods (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR (255),
+    food_types_id INT REFERENCES food_types(id) ON DELETE CASCADE
 );
 
 CREATE TABLE nutrient_levels (

@@ -63,13 +63,15 @@ class ConsumedFood
     sql = "SELECT    consumed_foods.id,
                      mealtimes.name AS mealtime_name,
 		                 foods.name     AS food_name,
-		                 foods.type,
+		                 food_types.name AS food_type_name,
 		                 consumed_foods.quantity
           FROM       consumed_foods
           INNER JOIN mealtimes
           ON         mealtimes.id = consumed_foods.mealtimes_id
           INNER JOIN foods
           ON         foods.id = consumed_foods.foods_id
+          INNER JOIN food_types
+          ON         foods.food_types_id = food_types.id
           ORDER BY   mealtimes_id, consumed_foods.id"
     consumed_foods = SqlRunner.run( sql )
     return consumed_foods

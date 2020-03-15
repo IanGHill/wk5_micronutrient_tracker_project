@@ -3,22 +3,22 @@ require_relative("../db/sql_runner")
 class Food
 
   attr_reader :id
-  attr_accessor :name, :type
+  attr_accessor :name, :food_types_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @type = options['type']
+    @food_types_id = options['food_types_id']
   end
 
   def save()
     sql = "INSERT INTO foods
             (name,
-            type)
+            food_types_id)
             VALUES
             ($1, $2)
             RETURNING id"
-    values = [@name, @type]
+    values = [@name, @food_types_id]
     food = SqlRunner.run(sql, values).first
     @id = food['id'].to_i
   end
@@ -26,11 +26,11 @@ class Food
   def update()
     sql = "UPDATE foods SET
           (name,
-          type)
+          food_types_id)
            =
            ($1, $2)
            WHERE id = $3"
-    values = [@name, @type, @id]
+    values = [@name, @food_types_id, @id]
     SqlRunner.run( sql, values )
   end
 
@@ -47,7 +47,8 @@ class Food
   end
 
   def self.all()
-    sql = "SELECT * FROM foods"
+    sql = "SELECT * FROM foods
+           ORDER BY name"
     foods = SqlRunner.run( sql )
     result = foods.map { |food| Food.new( food ) }
     return result
@@ -61,16 +62,13 @@ class Food
     return result
   end
 
-# Used to find all of the different types of food categories (e.g. fruit | vegetables | grains | etc)
-  def self.types()
-    sql = "SELECT DISTINCT type FROM foods;"
-    types = SqlRunner.run(sql)
-    return types
-  end
-
 #  Used to find all of the available foods of a particular type (e.g. give me all varieties of fruit)
   def self.find_by_type( type )
-    sql = "SELECT name FROM foods WHERE type = $1"
+    sql = "SELECT foods.name
+            FROM foods
+            INNER JOIN food_types
+            ON foods.food_types_id = food_types.id
+            WHERE foods.food_types_id = $1"
     values = [type]
     foods = SqlRunner.run( sql, values )
     result = foods.map { |food| Food.new( food ) }

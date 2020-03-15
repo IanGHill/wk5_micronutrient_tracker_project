@@ -3,7 +3,9 @@ require_relative('../models/nutrient')
 require_relative('../models/food')
 require_relative('../models/nutrient_level')
 require_relative('../models/consumed_food')
-require 'date'
+require_relative('../models/food_type')
+
+FoodType.delete_all
 Mealtime.delete_all
 Nutrient.delete_all
 Food.delete_all
@@ -22,6 +24,23 @@ mealtime3.save
 mealtime4.save
 mealtime5.save
 mealtime6.save
+
+foodtype1 = FoodType.new({ 'name' => 'Fruit'})
+foodtype2 = FoodType.new({ 'name' => 'Grains'})
+foodtype3 = FoodType.new({ 'name' => 'Nuts & Seeds'})
+foodtype4 = FoodType.new({ 'name' => 'Legumes'})
+foodtype5 = FoodType.new({ 'name' => 'Vegetables'})
+foodtype6 = FoodType.new({ 'name' => 'Beverages'})
+foodtype7 = FoodType.new({ 'name' => 'Favourites'})
+foodtype8 = FoodType.new({ 'name' => 'Herbs & Spices'})
+foodtype1.save
+foodtype2.save
+foodtype3.save
+foodtype4.save
+foodtype5.save
+foodtype6.save
+foodtype7.save
+foodtype8.save
 
 nutrient1 = Nutrient.new({ 'name' => 'Calcium (Ca)', 'rda' => '700', 'uom' => 'mg', 'type' => 'mineral'})
 nutrient2 = Nutrient.new({ 'name' => 'Copper (Cu)', 'rda' => '1.2', 'uom' => 'mg', 'type' => 'mineral'})
@@ -53,34 +72,34 @@ nutrient12.save
 nutrient13.save
 nutrient14.save
 nutrient15.save
-food1 = Food.new({'name' => 'Blueberries', 'type' => 'Fruit'})
-food2 = Food.new({'name' => 'Raspberries', 'type' => 'Fruit'})
-food3 = Food.new({'name' => 'Apples', 'type' => 'Fruit'})
-food4 = Food.new({'name' => 'Bananas', 'type' => 'Fruit'})
-food5 = Food.new({'name' => 'Brown Rice', 'type' => 'Grains'})
-food6 = Food.new({'name' => 'Rolled Oats', 'type' => 'Grains'})
-food7 = Food.new({'name' => 'Wholemeal Bread', 'type' => 'Grains'})
-food8 = Food.new({'name' => 'Butterbeans', 'type' => 'Legumes'})
-food9 = Food.new({'name' => 'Broad beans', 'type' => 'Legumes'})
-food10 = Food.new({'name' => 'Linseeds', 'type' => 'Nuts & Seeds'})
-food11 = Food.new({'name' => 'Walnuts', 'type' => 'Nuts & Seeds'})
-food12 = Food.new({'name' => 'Pumpkin Seeds', 'type' => 'Nuts & Seeds'})
-food13 = Food.new({'name' => 'Coconut Milk', 'type' => 'Nuts & Seeds'})
-food14 = Food.new({'name' => 'Cinnamon', 'type' => 'Nuts & Seeds'})
-food15 = Food.new({'name' => 'Ginger', 'type' => 'Nuts & Seeds'})
-food16 = Food.new({'name' => 'Cumin Seeds', 'type' => 'Nuts & Seeds'})
-food17 = Food.new({'name' => 'Pepper', 'type' => 'Nuts & Seeds'})
-food18 = Food.new({'name' => 'Curry Powder', 'type' => 'Nuts & Seeds'})
-food19 = Food.new({'name' => 'Broccoli', 'type' => 'Vegetables'})
-food20 = Food.new({'name' => 'Parsnip', 'type' => 'Vegetables'})
-food21 = Food.new({'name' => 'Celeriac', 'type' => 'Vegetables'})
-food22 = Food.new({'name' => 'Spring Onions', 'type' => 'Vegetables'})
-food23 = Food.new({'name' => 'Carrots', 'type' => 'Vegetables'})
-food24 = Food.new({'name' => 'Spinach', 'type' => 'Vegetables'})
-food25 = Food.new({'name' => 'Mushrooms', 'type' => 'Vegetables'})
-food26 = Food.new({'name' => 'Tomatoes', 'type' => 'Vegetables'})
-food27 = Food.new({'name' => 'Sweet Potatoes', 'type' => 'Vegetables'})
-food28 = Food.new({'name' => 'Sweet Peppers', 'type' => 'Vegetables'})
+food1 = Food.new({'name' => 'Blueberries', 'food_types_id' => foodtype1.id})
+food2 = Food.new({'name' => 'Raspberries', 'food_types_id' => foodtype1.id})
+food3 = Food.new({'name' => 'Apples', 'food_types_id' => foodtype1.id})
+food4 = Food.new({'name' => 'Bananas', 'food_types_id' => foodtype1.id})
+food5 = Food.new({'name' => 'Brown Rice', 'food_types_id' => foodtype2.id})
+food6 = Food.new({'name' => 'Rolled Oats', 'food_types_id' => foodtype2.id})
+food7 = Food.new({'name' => 'Wholemeal Bread', 'food_types_id' => foodtype2.id})
+food8 = Food.new({'name' => 'Butterbeans', 'food_types_id' => foodtype4.id})
+food9 = Food.new({'name' => 'Broad beans', 'food_types_id' => foodtype4.id})
+food10 = Food.new({'name' => 'Linseeds', 'food_types_id' => foodtype3.id})
+food11 = Food.new({'name' => 'Walnuts', 'food_types_id' => foodtype3.id})
+food12 = Food.new({'name' => 'Pumpkin Seeds', 'food_types_id' => foodtype3.id})
+food13 = Food.new({'name' => 'Coconut Milk', 'food_types_id' => foodtype6.id})
+food14 = Food.new({'name' => 'Cinnamon', 'food_types_id' => foodtype8.id})
+food15 = Food.new({'name' => 'Ginger', 'food_types_id' => foodtype8.id})
+food16 = Food.new({'name' => 'Cumin', 'food_types_id' => foodtype8.id})
+food17 = Food.new({'name' => 'Pepper', 'food_types_id' => foodtype8.id})
+food18 = Food.new({'name' => 'Curry Powder', 'food_types_id' => foodtype8.id})
+food19 = Food.new({'name' => 'Broccoli', 'food_types_id' => foodtype5.id})
+food20 = Food.new({'name' => 'Parsnip', 'food_types_id' => foodtype5.id})
+food21 = Food.new({'name' => 'Celeriac', 'food_types_id' => foodtype5.id})
+food22 = Food.new({'name' => 'Spring Onions', 'food_types_id' => foodtype5.id})
+food23 = Food.new({'name' => 'Carrots', 'food_types_id' => foodtype5.id})
+food24 = Food.new({'name' => 'Spinach', 'food_types_id' => foodtype5.id})
+food25 = Food.new({'name' => 'Mushrooms', 'food_types_id' => foodtype5.id})
+food26 = Food.new({'name' => 'Tomatoes', 'food_types_id' => foodtype5.id})
+food27 = Food.new({'name' => 'Sweet Potatoes', 'food_types_id' => foodtype5.id})
+food28 = Food.new({'name' => 'Sweet Peppers', 'food_types_id' => foodtype5.id})
 food1.save
 food2.save
 food3.save
