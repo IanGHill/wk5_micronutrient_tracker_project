@@ -66,10 +66,10 @@ nutrient6.save
 nutrient7.save
 nutrient8.save
 nutrient9.save
-nutrient10.save
 nutrient11.save
 nutrient12.save
 nutrient13.save
+nutrient10.save
 nutrient14.save
 nutrient15.save
 food1 = Food.new({'name' => 'Blueberries', 'food_types_id' => foodtype1.id})

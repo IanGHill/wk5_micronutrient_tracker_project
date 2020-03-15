@@ -1,55 +1,62 @@
-<form method="post" action="/food-diary">
+<br>
+<br>
 
+<!-- Form for creating an entry on the Food Diary -->
+<h3>Food Diary</h3>
+<p>Build your nutritional profile by logging food items below</p>
+<br>
+<form method="post" action="/food-diary">
   <label for="mealtime-select">Select Mealtime:</label>
-    <select id="mealtime_select" name="mealtimes_id">
+    <select id="mealtime-select" name="mealtimes_id">
       <% @all_mealtimes.each do |mealtime| %>
           <option value=<%= mealtime.id %>><%= mealtime.name %></option>
       <% end %>
     </select>
 
   <label for="food-select">Select Food:</label>
-    <select id="food_select" name="foods_id">
-      <% @all_foods.each do |food| %>
-          <option value=<%= food.id %>><%= food.name %></option>
-      <% end %>
-    </select>
+   <select id="food-select" name="foods_id">
+     <% @all_foods.each do |food| %>
+         <option value=<%= food.id %>><%= food.name %></option>
+     <% end %>
+   </select>
 
-    <label for="quantity">Quantity(g)</label>
-      <input type="number" id="quantity" name="quantity" placeholder="Enter quantity (g)" required min = 1 >
+  <label for="quantity">Quantity(g)</label>
+    <input type="number" id="quantity" name="quantity" placeholder="Enter quantity (g)" required min = 1 >
 
-    <input type="submit" value="Enter Food">
+  <input type="submit" value="Enter Food">
 
 </form>
 
+<!-- Food Diary displays all foods consumed -->
+
 <hr>
-
-<h3>Food Diary</h3>
-
-  <table>
-    <tr>
-      <th>Mealtime</th>
-      <th>Food</th>
-      <th>Type</th>
-      <th>Quantity</th>
-    </tr>
-    <% for food in @all_meals %>
-    <tr>
-      <td><%= food['mealtime_name'] %></td>
-      <td><%= food['food_name'] %></td>
-      <td><%= food['food_type_name'] %></td>
-      <td><%= "#{food['quantity'].to_s}g"  %></td>
-      <td><form method="post" action="/food-diary/<%= "#{food['id']}" %>/delete">
-            <input type="submit" value="Delete Food">
-          </form>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+<table>
+  <tr>
+    <th>Mealtime</th>
+    <th>Food</th>
+    <th>Type</th>
+    <th>Quantity</th>
+  </tr>
+  <% for food in @all_meals %>
+  <tr>
+    <td><%= food['mealtime_name'] %></td>
+    <td><%= food['food_name'] %></td>
+    <td><%= food['food_type_name'] %></td>
+    <td><%= "#{food['quantity'].to_s}g"  %></td>
+    <td><form method="post" action="/food-diary/<%= "#{food['id']}" %>/delete">
+          <input type="submit" value="Delete">
+        </form>
+    </td>
+  </tr>
+  <% end %>
+</table>
 
 <br>
 
 <hr>
+<h3>Nutritional Data</h3>
 <hr>
+<!-- Nutrition tables show total vitamins and minerals for foods consumed (listed in food diary above) -->
 <table>
   <tr>
     <th>Mineral</th>
