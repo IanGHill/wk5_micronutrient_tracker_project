@@ -1,6 +1,10 @@
+* {
+  font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
 body {
   background-color: #AFD0BF;
-  font-family: sans-serif;
+
 }
 
 h1 {
@@ -21,7 +25,6 @@ ul {
 }
 
 li {
-  color: #9C7241;
   float: left;
 }
 
@@ -56,9 +59,26 @@ a:hover {
 a:active {
   display: block;
   padding: 8px;
-  background-color: green;
+  background-color: white;
   text-decoration: none;
   color: black;
+}
+
+th, td {
+  padding: 5px 5px 0px 5px
+  border: 1px solid #ddd;
+}
+
+th {
+  text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+tr:hover { background-color: #ddd;
+
 }
 
 .container {
