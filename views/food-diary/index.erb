@@ -39,7 +39,7 @@
         <th>Type</th>
         <th>Quantity</th>
         <th><input type="submit" value="Delete Selected" form="delete-food"></th>
-        <th><input type="submit" value="Group Selected" form="group-food"></th>
+        <th><input type="submit" value="Group Selected as meal" form="group-food"></th>
       </tr>
       <% for food in @all_meals %>
 
@@ -54,7 +54,12 @@
         </td>
       </tr>
       <% end %>
+      <tr>
+        <label for="food-name">Meal Name:</label>
+        <input type="text" id="food-name" form="group-food" name="food_name" placeholder="Enter Meal Name" required >
+      </tr>
     </table>
+
 
 <hr>
 

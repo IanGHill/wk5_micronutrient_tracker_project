@@ -1,5 +1,6 @@
 require_relative("../db/sql_runner")
 require_relative("nutrient_level")
+require ('pry-byebug')
 
 class ConsumedFood
 
@@ -10,7 +11,7 @@ class ConsumedFood
     @id = options['id'].to_i if options['id']
     @foods_id= options['foods_id'].to_i
     @mealtimes_id = options['mealtimes_id'].to_i
-    @quantity = options['quantity']
+    @quantity = options['quantity'].to_i
     @group_as_favourite = options['group_as_favourite']
   end
 
@@ -35,18 +36,8 @@ class ConsumedFood
           group_as_favourite)
            =
            ($1, $2, $3, $4)
-           WHERE id = $4"
+           WHERE id = $5"
     values = [@foods_id, @mealtimes_id, @quantity, @group_as_favourite, @id]
-    SqlRunner.run( sql, values )
-  end
-
-  def update_grp_fav_status()
-    sql = "UPDATE consumed_foods SET
-          (group_as_favourite)
-           =
-           ($1)
-           WHERE id = $2"
-    values = [@group_as_favourite, @id]
     SqlRunner.run( sql, values )
   end
 

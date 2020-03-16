@@ -42,5 +42,5 @@ CREATE TABLE consumed_foods (
     foods_id INT REFERENCES foods(id) ON DELETE CASCADE,
     mealtimes_id INT REFERENCES mealtimes(id) ON DELETE CASCADE,
     quantity INT,
-    group_as_favourite BOOLEAN DEFAULT false NOT NULL
+    group_as_favourite BOOLEAN DEFAULT false
 );

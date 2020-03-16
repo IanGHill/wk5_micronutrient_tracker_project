@@ -17,13 +17,16 @@ get '/favourite' do
   erb( :"favourite/index" )
 end
 
+# This section handles grouping foods together into a favourite 'meal'
 post '/favourite/new' do
-  # binding.pry
+
   params.each do |food, id|
-    binding.pry
+
     consumed_food = ConsumedFood.find(id)
-    consumed_food.group_as_favourite = true
-    binding.pry
+    consumed_food.group_as_favourite = TRUE
+    consumed_food.update
   end
+
+
   redirect to "/food-diary"
 end
