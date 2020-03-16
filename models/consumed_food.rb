@@ -4,13 +4,14 @@ require_relative("nutrient_level")
 class ConsumedFood
 
   attr_reader :id
-  attr_accessor :foods_id, :mealtimes_id, :quantity
+  attr_accessor :foods_id, :mealtimes_id, :quantity, :group_as_favourite
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @foods_id= options['foods_id'].to_i
     @mealtimes_id = options['mealtimes_id'].to_i
     @quantity = options['quantity']
+    @group_as_favourite = options['group_as_favourite']
   end
 
   def save()
@@ -30,11 +31,22 @@ class ConsumedFood
     sql = "UPDATE consumed_foods SET
           (foods_id,
           mealtimes_id,
-          quantity)
+          quantity,
+          group_as_favourite)
            =
-           ($1, $2, $3)
+           ($1, $2, $3, $4)
            WHERE id = $4"
-    values = [@foods_id, @mealtimes_id, @quantity, @id]
+    values = [@foods_id, @mealtimes_id, @quantity, @group_as_favourite, @id]
+    SqlRunner.run( sql, values )
+  end
+
+  def update_grp_fav_status()
+    sql = "UPDATE consumed_foods SET
+          (group_as_favourite)
+           =
+           ($1)
+           WHERE id = $2"
+    values = [@group_as_favourite, @id]
     SqlRunner.run( sql, values )
   end
 

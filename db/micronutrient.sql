@@ -41,5 +41,6 @@ CREATE TABLE consumed_foods (
     id SERIAL PRIMARY KEY,
     foods_id INT REFERENCES foods(id) ON DELETE CASCADE,
     mealtimes_id INT REFERENCES mealtimes(id) ON DELETE CASCADE,
-    quantity INT
+    quantity INT,
+    group_as_favourite BOOLEAN DEFAULT false NOT NULL
 );

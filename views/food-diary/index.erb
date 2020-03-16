@@ -30,28 +30,31 @@
 <!-- Food Diary displays all foods consumed -->
 
 <hr>
-<form id="delete-food-2" method="post" action="/food-diary/delete">
-<table>
-  <tr>
-    <th>Mealtime</th>
-    <th>Food</th>
-    <th>Type</th>
-    <th>Quantity</th>
-  </tr>
-  <% for food in @all_meals %>
+<form id="delete-food" method="post" action="/food-diary/delete"></form>
+  <form id="group-food" method="post" action="/favourite/new"></form>
+    <table>
+      <tr>
+        <th>Mealtime</th>
+        <th>Food</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th><input type="submit" value="Delete Selected" form="delete-food"></th>
+        <th><input type="submit" value="Group Selected" form="group-food"></th>
+      </tr>
+      <% for food in @all_meals %>
 
-  <tr>
-    <td><%= food['mealtime_name'] %></td>
-    <td><%= food['food_name'] %></td>
-    <td><%= food['food_type_name'] %></td>
-    <td><%= "#{food['quantity'].to_s}g"  %></td>
-    <td><input type="checkbox" id="xxxx" name="<%= "#{food['food_name']}" %>" value="<%= "#{food['id']}" %>" form="delete-food-2">
-    </td>
-  </tr>
-  <% end %>
-</table>
-<input type="submit" value="Delete Selected" form="delete-food-2">
-</form>
+      <tr>
+        <td><%= food['mealtime_name'] %></td>
+        <td><%= food['food_name'] %></td>
+        <td><%= food['food_type_name'] %></td>
+        <td><%= "#{food['quantity'].to_s}g"  %></td>
+        <td><input type="checkbox" id="xxxx" name="<%= "#{food['food_name']}" %>" value="<%= "#{food['id']}" %>" form="delete-food">
+        </td>
+        <td><input type="checkbox" id="yyyy" name="<%= "#{food['food_name']}" %>" value="<%= "#{food['id']}" %>" form="group-food">
+        </td>
+      </tr>
+      <% end %>
+    </table>
 
 <hr>
 
