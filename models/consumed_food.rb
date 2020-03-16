@@ -118,8 +118,27 @@ class ConsumedFood
     result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
   end
 
-# Brings back complete nutritional information for all of the foods consumed
-  def self.nutrients_total
+# Brings back complete nutritional information for a new favourite grouped food
+  def self.fav_nutrients_total
+    sql = "SELECT nutrients.id,
+		              nutrients.name
+                  (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
+                  AS total_nutrient_level
+           FROM consumed_foods
+           INNER JOIN nutrient_levels
+           ON consumed_foods.foods_id = nutrient_levels.foods_id
+           INNER JOIN nutrients
+           ON nutrients.id = nutrient_levels.nutrients_id
+           where consumed_foods.group_as_favourite = TRUE
+           GROUP BY nutrients.id,
+                    nutrients.name
+           ORDER BY nutrients.id"
+    total_nutrients = SqlRunner.run(sql)
+    return total_nutrients
+  end
+
+# Brings back complete MINERAL nutritional information for all of the foods consumed
+  def self.nutrients_total_minerals
     sql = "SELECT nutrients.id,
 		              nutrients.name,
                   nutrients.type,
@@ -134,70 +153,48 @@ class ConsumedFood
            ON consumed_foods.foods_id = nutrient_levels.foods_id
            INNER JOIN nutrients
            ON nutrients.id = nutrient_levels.nutrients_id
+           WHERE nutrients.type = 'mineral'
            GROUP BY nutrients.id,
                     nutrients.name,
                     nutrients.type,
                     nutrients.rda,
                     nutrients.uom
            ORDER BY nutrients.id"
-    total_nutrients = SqlRunner.run(sql)
-    return total_nutrients
+    total_minerals = SqlRunner.run(sql)
+    return total_minerals
   end
 
-  # Brings back complete MINERAL nutritional information for all of the foods consumed
-    def self.nutrients_total_minerals
-      sql = "SELECT nutrients.id,
-  		              nutrients.name,
+# Brings back complete VITAMIN nutritional information for all of the foods consumed
+  def self.nutrients_total_vitamins
+    sql = "SELECT nutrients.id,
+		              nutrients.name,
+                  nutrients.type,
+                  nutrients.rda,
+                  nutrients.uom,
+                  (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
+                  AS total_nutrient_level,
+    			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
+                  AS percentage_rda
+           FROM consumed_foods
+           INNER JOIN nutrient_levels
+           ON consumed_foods.foods_id = nutrient_levels.foods_id
+           INNER JOIN nutrients
+           ON nutrients.id = nutrient_levels.nutrients_id
+           WHERE nutrients.type = 'vitamin'
+           GROUP BY nutrients.id,
+                    nutrients.name,
                     nutrients.type,
                     nutrients.rda,
-                    nutrients.uom,
-                    (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
-                    AS total_nutrient_level,
-      			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
-                    AS percentage_rda
-             FROM consumed_foods
-             INNER JOIN nutrient_levels
-             ON consumed_foods.foods_id = nutrient_levels.foods_id
-             INNER JOIN nutrients
-             ON nutrients.id = nutrient_levels.nutrients_id
-             WHERE nutrients.type = 'mineral'
-             GROUP BY nutrients.id,
-                      nutrients.name,
-                      nutrients.type,
-                      nutrients.rda,
-                      nutrients.uom
-             ORDER BY nutrients.id"
-      total_minerals = SqlRunner.run(sql)
-      return total_minerals
-    end
+                    nutrients.uom
+           ORDER BY nutrients.id"
+    total_minerals = SqlRunner.run(sql)
+    return total_minerals
+  end
 
-    # Brings back complete VITAMIN nutritional information for all of the foods consumed
-      def self.nutrients_total_vitamins
-        sql = "SELECT nutrients.id,
-    		              nutrients.name,
-                      nutrients.type,
-                      nutrients.rda,
-                      nutrients.uom,
-                      (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
-                      AS total_nutrient_level,
-        			        (SELECT (SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))/rda*100)
-                      AS percentage_rda
-               FROM consumed_foods
-               INNER JOIN nutrient_levels
-               ON consumed_foods.foods_id = nutrient_levels.foods_id
-               INNER JOIN nutrients
-               ON nutrients.id = nutrient_levels.nutrients_id
-               WHERE nutrients.type = 'vitamin'
-               GROUP BY nutrients.id,
-                        nutrients.name,
-                        nutrients.type,
-                        nutrients.rda,
-                        nutrients.uom
-               ORDER BY nutrients.id"
-        total_minerals = SqlRunner.run(sql)
-        return total_minerals
-      end
-
+  def reset_group_as_favourite()
+    sql = "UPDATE consumed_foods SET group_as_favourite = 'false'"
+    SqlRunner.run( sql)
+  end
 
 
 end

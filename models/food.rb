@@ -8,7 +8,7 @@ class Food
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @food_types_id = options['food_types_id']
+    @food_types_id = options['food_types_id'].to_i
   end
 
   def save()

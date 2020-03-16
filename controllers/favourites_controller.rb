@@ -8,6 +8,7 @@ require_relative('../models/mealtime')
 require_relative('../models/nutrient_level')
 require_relative('../models/nutrient')
 require_relative('../models/food_type')
+
 also_reload('../models/*')
 
 
@@ -20,13 +21,25 @@ end
 # This section handles grouping foods together into a favourite 'meal'
 post '/favourite/new' do
 
-  params.each do |food, id|
+  @favourite_name = params['favourite_name']
 
-    consumed_food = ConsumedFood.find(id)
-    consumed_food.group_as_favourite = TRUE
-    consumed_food.update
+  params.each do |key, value|
+    if key != 'favourite_name'
+      consumed_food = ConsumedFood.find(value)
+      consumed_food.group_as_favourite = TRUE
+      consumed_food.update
+    end
   end
 
+  favourite_id = FoodType.find_by_name("Favourites")
+  binding.pry
+  new_favourite = Food.new({'name' => @favourite_name, 'food_types_id' => favourite_id})
+  new_favourite.save
 
-  redirect to "/food-diary"
+  new_fav_total_nutrients = ConsumedFood.fav_nutrients_total
+  binding.pry
+
+  ConsumedFood.reset_group_as_favourite
+
+  redirect to "/favourite"
 end
