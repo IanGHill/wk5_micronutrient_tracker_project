@@ -32,9 +32,12 @@ post '/food-diary' do
 end
 
 
-post '/food-diary/:id/delete' do
-  consumed_food = ConsumedFood.find(params[:id])
-  consumed_food.delete()
+post '/food-diary/delete' do
+  # binding.pry
+  params.each do |food, id|
+    consumed_food = ConsumedFood.find(id)
+    consumed_food.delete()
+  end
   redirect to "/food-diary"
 end
 
@@ -56,4 +59,9 @@ post '/food-diary/new' do
     nutrient_level.save
   end
   erb(:create)
+end
+
+get '/food-diary/favourite' do
+
+  erb(:favourite)
 end

@@ -100,6 +100,7 @@ food25 = Food.new({'name' => 'Mushrooms', 'food_types_id' => foodtype5.id})
 food26 = Food.new({'name' => 'Tomatoes', 'food_types_id' => foodtype5.id})
 food27 = Food.new({'name' => 'Sweet Potatoes', 'food_types_id' => foodtype5.id})
 food28 = Food.new({'name' => 'Sweet Peppers', 'food_types_id' => foodtype5.id})
+food29 = Food.new({'name' => 'Dummy', 'food_types_id' => foodtype7.id})
 food1.save
 food2.save
 food3.save
@@ -128,6 +129,7 @@ food25.save
 food26.save
 food27.save
 food28.save
+food29.save
 
 nutrientlevel1 = NutrientLevel.new({'foods_id' => food1.id, 'nutrients_id' => nutrient1.id, 'nutrient_level' => 5})
 nutrientlevel2 = NutrientLevel.new({'foods_id' => food1.id, 'nutrients_id' => nutrient3.id, 'nutrient_level' => 0.3})
@@ -528,6 +530,22 @@ nutrientlevel396 = NutrientLevel.new({'foods_id' => food28.id, 'nutrients_id' =>
 nutrientlevel397 = NutrientLevel.new({'foods_id' => food28.id, 'nutrients_id' => nutrient15.id, 'nutrient_level' => 5})
 nutrientlevel398 = NutrientLevel.new({'foods_id' => food28.id, 'nutrients_id' => nutrient8.id, 'nutrient_level' => 0.1})
 nutrientlevel399 = NutrientLevel.new({'foods_id' => food28.id, 'nutrients_id' => nutrient2.id, 'nutrient_level' => 0.01})
+
+nutrientlevel400 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient1.id, 'nutrient_level' => 0})
+nutrientlevel401 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient2.id, 'nutrient_level' => 0})
+nutrientlevel402 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient3.id, 'nutrient_level' => 0})
+nutrientlevel403 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient4.id, 'nutrient_level' => 0})
+nutrientlevel404 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient5.id, 'nutrient_level' => 0})
+nutrientlevel405 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient6.id, 'nutrient_level' => 0})
+nutrientlevel406 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient7.id, 'nutrient_level' => 0})
+nutrientlevel407 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient8.id, 'nutrient_level' => 0})
+nutrientlevel408 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient9.id, 'nutrient_level' => 0})
+nutrientlevel409 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient10.id, 'nutrient_level' => 0})
+nutrientlevel410 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient11.id, 'nutrient_level' => 0})
+nutrientlevel411 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient12.id, 'nutrient_level' => 0})
+nutrientlevel412 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient13.id, 'nutrient_level' => 0})
+nutrientlevel413 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient14.id, 'nutrient_level' => 0})
+nutrientlevel414 = NutrientLevel.new({'foods_id' => food29.id, 'nutrients_id' => nutrient15.id, 'nutrient_level' => 0})
 nutrientlevel1.save
 nutrientlevel2.save
 nutrientlevel3.save
@@ -927,3 +945,21 @@ nutrientlevel396.save
 nutrientlevel397.save
 nutrientlevel398.save
 nutrientlevel399.save
+nutrientlevel400.save
+nutrientlevel401.save
+nutrientlevel402.save
+nutrientlevel403.save
+nutrientlevel404.save
+nutrientlevel405.save
+nutrientlevel406.save
+nutrientlevel407.save
+nutrientlevel408.save
+nutrientlevel409.save
+nutrientlevel410.save
+nutrientlevel411.save
+nutrientlevel412.save
+nutrientlevel413.save
+nutrientlevel414.save
+
+dummy_consumed_food = ConsumedFood.new({'foods_id' => food29.id, 'mealtimes_id' => mealtime1.id, 'quantity' => 1})
+dummy_consumed_food.save
