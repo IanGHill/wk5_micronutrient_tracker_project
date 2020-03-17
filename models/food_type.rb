@@ -51,11 +51,9 @@ class FoodType
     return result
   end
 
-  def self.find_by_name(name)
-    sql = "SELECT *
-           FROM food_types
-           WHERE name = $1"
-    values = [name]
+  def self.find_by_name(food_name)
+    sql = "SELECT * FROM food_types WHERE food_types.name = $1"
+    values = [food_name]
     food_type = SqlRunner.run( sql, values )
     result = FoodType.new( food_type.first )
     return result

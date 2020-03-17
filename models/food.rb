@@ -64,7 +64,7 @@ class Food
 
 #  Used to find all of the available foods of a particular type (e.g. give me all varieties of fruit)
   def self.find_by_type( type )
-    sql = "SELECT foods.name
+    sql = "SELECT foods.*
             FROM foods
             INNER JOIN food_types
             ON foods.food_types_id = food_types.id
@@ -73,5 +73,56 @@ class Food
     foods = SqlRunner.run( sql, values )
     result = foods.map { |food| Food.new( food ) }
     return result
+  end
+
+  def self.find_favourites
+    sql = "SELECT foods.*
+            FROM foods
+            INNER JOIN food_types
+            ON foods.food_types_id = food_types.id
+            WHERE food_types.name = 'Favourites'"
+    foods = SqlRunner.run(sql)
+    result = foods.map { |food| Food.new( food ) }
+    return result
+  end
+
+  def minerals()
+    sql = "SELECT nutrients.id,
+		              nutrients.name,
+                  nutrients.type,
+                  nutrients.rda,
+                  nutrients.uom,
+                  nutrient_levels.nutrient_level,
+    			        (SELECT (nutrient_levels.nutrient_level / nutrients.rda * 100))
+                  AS percentage_rda
+           FROM nutrient_levels
+           INNER JOIN nutrients
+           ON nutrients.id = nutrient_levels.nutrients_id
+           WHERE nutrient_levels.foods_id = $1
+           AND nutrients.type = 'mineral'
+           ORDER BY nutrient_levels.nutrients_id"
+    values = [@id]
+    minerals = SqlRunner.run(sql, values)
+    return minerals
+  end
+
+  def vitamins()
+    sql = "SELECT nutrients.id,
+                  nutrients.name,
+                  nutrients.type,
+                  nutrients.rda,
+                  nutrients.uom,
+                  nutrient_levels.nutrient_level,
+                  (SELECT (nutrient_levels.nutrient_level / nutrients.rda * 100))
+                  AS percentage_rda
+           FROM nutrient_levels
+           INNER JOIN nutrients
+           ON nutrients.id = nutrient_levels.nutrients_id
+           WHERE nutrient_levels.foods_id = $1
+           AND nutrients.type = 'vitamin'
+           ORDER BY nutrient_levels.nutrients_id"
+    values = [@id]
+    vitamins = SqlRunner.run(sql, values)
+    return vitamins
   end
 end

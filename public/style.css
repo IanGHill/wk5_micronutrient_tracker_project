@@ -81,6 +81,13 @@ tr:hover { background-color: #ddd;
 
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .container {
   border-radius: 5px;
   background-color: #AFD0BF;

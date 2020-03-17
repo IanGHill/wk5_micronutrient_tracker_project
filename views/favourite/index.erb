@@ -1,3 +1,58 @@
-<h3>Manage Favourites</h3>
+<br>
+<h3>View Favourites</h3>
 
-<p>some placeholder text</p>
+<p>Select favourites from the dropdown to view their nutritional information:</p>
+
+<form method="post" action="/favourite">
+
+  <label for="favourites-select">Select Favourite:</label>
+   <select id="favourites-select" name="foods_id">
+     <% @all_fav_foods.each do |food| %>
+         <option value=<%= food.id %>><%= food.name %></option>
+     <% end %>
+   </select>
+
+  <input type="submit" value="Show Nutritional Data">
+
+</form>
+
+<hr>
+
+<h3>Nutritional Data for <%= @selected_fav.name %></h3>
+
+<!-- Nutrition tables show total vitamins and minerals for foods consumed (listed in food diary above) -->
+<table>
+  <tr>
+    <th>Mineral</th>
+    <th>RDA</th>
+    <th>Quantity</th>
+    <th>RDA%</th>
+  </tr>
+  <% for mineral in @mineral_data %>
+  <tr>
+    <td><%= mineral['name'] %></td>
+    <td class="right"><%= "#{mineral['rda']}#{mineral['uom']}"  %></td>
+    <td class="right"><%= "#{mineral['nutrient_level'].to_f.round(2)}#{mineral['uom']}"  %></td>
+    <td class="right"><%= mineral['percentage_rda'].to_f.round %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<hr>
+<table>
+  <tr>
+    <th>Vitamin</th>
+    <th>RDA</th>
+    <th>Quantity</th>
+    <th>RDA%</th>
+  </tr>
+  <% for vitamin in @vitamin_data %>
+  <tr>
+    <td><%= vitamin['name'] %></td>
+    <td class="right"><%= "#{vitamin['rda']}#{vitamin['uom']}"  %></td>
+    <td class="right"><%= "#{vitamin['nutrient_level'].to_f.round(2)}#{vitamin['uom']}"  %></td>
+    <td class="right"><%= vitamin['percentage_rda'].to_f.round %></td>
+  </tr>
+  <% end %>
+</table>
+<hr>

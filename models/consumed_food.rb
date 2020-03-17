@@ -1,5 +1,9 @@
 require_relative("../db/sql_runner")
 require_relative("nutrient_level")
+require_relative("food_type")
+require_relative("nutrient")
+require_relative("mealtime")
+require_relative("food")
 require ('pry-byebug')
 
 class ConsumedFood
@@ -12,7 +16,7 @@ class ConsumedFood
     @foods_id= options['foods_id'].to_i
     @mealtimes_id = options['mealtimes_id'].to_i
     @quantity = options['quantity'].to_i
-    @group_as_favourite = options['group_as_favourite']
+    @group_as_favourite = options['group_as_favourite'] if options['group_as_favourite']
   end
 
   def save()
@@ -119,9 +123,9 @@ class ConsumedFood
   end
 
 # Brings back complete nutritional information for a new favourite grouped food
-  def self.fav_nutrients_total
+  def self.fav_nutrients_total()
     sql = "SELECT nutrients.id,
-		              nutrients.name
+		              nutrients.name,
                   (SELECT SUM (nutrient_levels.nutrient_level * consumed_foods.quantity /100))
                   AS total_nutrient_level
            FROM consumed_foods
@@ -191,7 +195,7 @@ class ConsumedFood
     return total_minerals
   end
 
-  def reset_group_as_favourite()
+  def self.reset_group_as_favourite()
     sql = "UPDATE consumed_foods SET group_as_favourite = 'false'"
     SqlRunner.run( sql)
   end
