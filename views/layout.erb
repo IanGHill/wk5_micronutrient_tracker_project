@@ -7,18 +7,25 @@
     <h1>Vegan Wholefood Micronutrient Tracker</h1>
   </head>
   <body>
-    <nav>
-      <section class="flex-container header">
-        <div><a href="/food-diary">Food Diary</a></div>
-        <div><a href="/food/new">Input New Food</a></div>
-        <div><a href="/favourite">View Favourites</a></div>
-      </section>
-      <!-- <ul>
-        <li><a href="/food-diary">Food Diary</a></li>
-        <li><a href="/food/new">Input New Food</a></li>
-        <li><a href="/favourite">View Favourites</a></li>
-      </ul> -->
-    </nav>
+    <section class="flex-container">
+      <aside class="flex-item sidebar"></aside>
+      <main class="flex-item main-center">
+        <nav>
+          <section class="flex-container">
+            <main class="flex-item one-third">
+              <div><a href="/food-diary">Food Diary</a></div>
+            </main>
+            <main class="flex-item one-third">
+              <div><a href="/food/new">Input New Food</a></div>
+            </main>
+            <main class="flex-item one-third">
+              <div><a href="/favourite">View Favourite Meals</a></div>
+            </main>
+          </section>
+        </nav>
+      </main>
+      <aside class="flex-item sidebar"></aside>
+    </section>
     <br>
     <%= yield %>
   </body>

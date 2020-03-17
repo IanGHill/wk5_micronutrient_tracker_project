@@ -14,7 +14,6 @@ h1 {
   color: lightgrey;
   font-size: 2.5em;
   font-style: italic;
-  font
 }
 
 h2 {
@@ -73,8 +72,22 @@ a:active {
   color: black;
 }
 
-select {
-  padding: 10px;
+.outer {
+  width: 70%;
+  margin: 2px auto;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  width: 50%;
+  float: left;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.input {
+  width: 50%;
 }
 
 th, td {
@@ -104,6 +117,14 @@ table {
   margin-left: auto;
   margin-right: auto;
   align-self: auto;
+  border: collapse;
+}
+
+#form1 {
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .center {
@@ -111,24 +132,6 @@ table {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-}
-
-.container {
-  border-radius: 5px;
-  background-color: #AFD0BF;
-  padding: 20px;
-}
-
-.col-25 {
-  float: left;
-  width: 35%;
-  margin-top: 6px;
-}
-
-.col-75 {
-  float: right;
-  width: 65%;
-  margin-top: 6px;
 }
 
 .flex-container {
@@ -159,15 +162,22 @@ table {
   justify-content: center;
 }
 
-.sidebar {
-  flex: 1;
+.main-center {
+  flex: 4;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: green;
+
 }
 
-.header,
-.footer  {
-  flex: 2 80%;
-  flex-direction: row;
-  justify-content: center;
-  justify-content: space-around;
-  background-color: green;
+.one-third {
+  flex: 1;
+  padding-left: 60px;
+  padding-right: 60px;
+
+}
+
+.sidebar {
+  flex: 1;
 }

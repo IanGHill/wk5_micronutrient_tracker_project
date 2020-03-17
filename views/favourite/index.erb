@@ -4,12 +4,9 @@
   <main class="flex-item main center">
 
     <div class="center">
-        <p>Choose favourites from the dropdown to view their nutritional info</p>
-    </div>
-    <div class="center">
       <form method="post" action="/favourite">
 
-        <label for="favourites-select">Select:</label>
+        <label for="favourites-select">Choose favourites to view their nutritional information:</label>
          <select id="favourites-select" name="foods_id">
            <% @all_fav_foods.each do |food| %>
                <option value=<%= food.id %>><%= food.name %></option>
