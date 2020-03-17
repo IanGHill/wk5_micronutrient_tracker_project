@@ -1,9 +1,15 @@
-<br>
-<h3>View Favourites</h3>
 
-<p>Select favourites from the dropdown to view their nutritional information:</p>
+<section class="flex-container">
+  <header class="flex-item header">Header</header>
+  <aside class="flex-item sidebar">Sidebar</aside>
+  <main class="flex-item main">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</main>
+  <aside class="flex-item sidebar">Sidebar</aside>
+  <footer class="flex-item footer">Footer</footer>
 
-<form method="post" action="/favourite">
+
+  <p>Select favourites from the dropdown to view their nutritional information:</p>
+
+  <form method="post" action="/favourite">
 
   <label for="favourites-select">Select Favourite:</label>
    <select id="favourites-select" name="foods_id">
@@ -14,14 +20,14 @@
 
   <input type="submit" value="Show Nutritional Data">
 
-</form>
+  </form>
 
-<hr>
+  <hr>
 
-<h3>Nutritional Data for <%= @selected_fav.name %></h3>
+  <h3>Nutritional Data for <strong><%= @selected_fav.name %></strong></h3>
 
-<!-- Nutrition tables show total vitamins and minerals for foods consumed (listed in food diary above) -->
-<table>
+  <!-- Nutrition tables show total vitamins and minerals for foods consumed (listed in food diary above) -->
+  <table>
   <tr>
     <th>Mineral</th>
     <th>RDA</th>
@@ -36,10 +42,10 @@
     <td class="right"><%= mineral['percentage_rda'].to_f.round %></td>
   </tr>
   <% end %>
-</table>
-<br>
-<hr>
-<table>
+  </table>
+  <br>
+  <hr>
+  <table>
   <tr>
     <th>Vitamin</th>
     <th>RDA</th>
@@ -54,5 +60,7 @@
     <td class="right"><%= vitamin['percentage_rda'].to_f.round %></td>
   </tr>
   <% end %>
-</table>
-<hr>
+  </table>
+  <hr>
+
+</section>
