@@ -12,18 +12,23 @@ also_reload('../models/*')
 
 get '/favourite' do
   @all_fav_foods = Food.find_favourites
+# check if there are any favourites set up, if so display the page. If not then display a different page with a message indicating that no favourites have been set up yet
+  if @all_fav_foods.length > 0
+# if we are landing on this page for the first time populate the nutritional data with the first item from the dropdown, otherwise populate using the user selected item
+    if params[:foods_id]
+      @selected_fav = Food.find(params[:foods_id].to_i)
+    else
+      @selected_fav = @all_fav_foods.first
 
-# check if we are landing on this page for the first time and if so populate the nutritional data with the first item from the dropdown, otherwise populate using the selected item
-  if params[:foods_id]
-    @selected_fav = Food.find(params[:foods_id].to_i)
+    end
+
+    @mineral_data = @selected_fav.minerals()
+    @vitamin_data = @selected_fav.vitamins()
+
+    erb( :"favourite/index" )
   else
-    @selected_fav = @all_fav_foods.first
+    erb(:"favourite/none")
   end
-
-  @mineral_data = @selected_fav.minerals()
-  @vitamin_data = @selected_fav.vitamins()
-
-  erb( :"favourite/index" )
 end
 
 post '/favourite' do
