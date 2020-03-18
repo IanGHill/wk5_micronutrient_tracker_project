@@ -1,10 +1,4 @@
 require_relative("../db/sql_runner")
-require_relative("nutrient_level")
-require_relative("food_type")
-require_relative("nutrient")
-require_relative("mealtime")
-require_relative("food")
-require ('pry-byebug')
 
 class ConsumedFood
 
@@ -52,7 +46,7 @@ class ConsumedFood
 
   def delete()
     sql = "DELETE FROM consumed_foods
-    WHERE id = $1"
+           WHERE id = $1"
     values = [@id]
     SqlRunner.run( sql, values )
   end
@@ -92,36 +86,6 @@ class ConsumedFood
     return result
   end
 
-  def self.nutrients(foods_id)
-    sql = "SELECT nutrient_levels.* FROM consumed_foods
-          INNER JOIN nutrient_levels ON consumed_foods.foods_id = nutrient_levels.foods_id
-          WHERE consumed_foods.foods_id = $1"
-    values = [foods_id]
-    nutrients = SqlRunner.run( sql, values )
-    result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
-  end
-
-  def nutrients
-    sql = "SELECT nutrient_levels.* FROM consumed_foods
-          INNER JOIN nutrient_levels ON consumed_foods.foods_id = nutrient_levels.foods_id
-          WHERE consumed_foods.id = $1"
-    values = [@id]
-    nutrients = SqlRunner.run( sql, values )
-    result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
-  end
-
-  def nutrients_by_qty
-    sql = "SELECT nutrient_levels.id,
-                  nutrient_levels.nutrients_id,
-                  ((nutrient_levels.nutrient_level * consumed_foods.quantity) /100) AS nutrient_level
-          FROM consumed_foods
-          INNER JOIN nutrient_levels ON consumed_foods.foods_id = nutrient_levels.foods_id
-          WHERE consumed_foods.id = $1"
-    values = [@id]
-    nutrients = SqlRunner.run( sql, values )
-    result = nutrients.map{|nutrient| NutrientLevel.new(nutrient)}
-  end
-
 # Brings back complete nutritional information for a new favourite grouped food
   def self.fav_nutrients_total()
     sql = "SELECT nutrients.id,
@@ -133,7 +97,7 @@ class ConsumedFood
            ON consumed_foods.foods_id = nutrient_levels.foods_id
            INNER JOIN nutrients
            ON nutrients.id = nutrient_levels.nutrients_id
-           where consumed_foods.group_as_favourite = TRUE
+           WHERE consumed_foods.group_as_favourite = TRUE
            GROUP BY nutrients.id,
                     nutrients.name
            ORDER BY nutrients.id"
@@ -195,10 +159,10 @@ class ConsumedFood
     return total_minerals
   end
 
+# resets flag on consumed_foods table once we have grouped items as a favourite meal
   def self.reset_group_as_favourite()
     sql = "UPDATE consumed_foods SET group_as_favourite = 'false'"
     SqlRunner.run( sql)
   end
-
 
 end

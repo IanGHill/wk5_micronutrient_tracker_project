@@ -22,27 +22,9 @@ class Food
     @id = food['id'].to_i
   end
 
-  def update()
-    sql = "UPDATE foods SET
-          (name,
-          food_types_id)
-           =
-           ($1, $2)
-           WHERE id = $3"
-    values = [@name, @food_types_id, @id]
-    SqlRunner.run( sql, values )
-  end
-
   def self.delete_all()
     sql = "DELETE FROM foods;"
     SqlRunner.run(sql)
-  end
-
-  def delete()
-    sql = "DELETE FROM foods
-    WHERE id = $1"
-    values = [@id]
-    SqlRunner.run( sql, values )
   end
 
   def self.all()
@@ -58,19 +40,6 @@ class Food
     values = [id]
     food = SqlRunner.run( sql, values )
     result = Food.new( food.first )
-    return result
-  end
-
-#  Used to find all of the available foods of a particular type (e.g. give me all varieties of fruit)
-  def self.find_by_type( type )
-    sql = "SELECT foods.*
-            FROM foods
-            INNER JOIN food_types
-            ON foods.food_types_id = food_types.id
-            WHERE foods.food_types_id = $1"
-    values = [type]
-    foods = SqlRunner.run( sql, values )
-    result = foods.map { |food| Food.new( food ) }
     return result
   end
 

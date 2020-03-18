@@ -20,22 +20,9 @@ class Mealtime
     @id = mealtime['id'].to_i
   end
 
-  def update()
-    sql = "UPDATE mealtimes SET name = $1 WHERE id = $2"
-    values = [@name, @id]
-    SqlRunner.run( sql, values )
-  end
-
   def self.delete_all()
     sql = "DELETE FROM mealtimes;"
     SqlRunner.run(sql)
-  end
-
-  def delete()
-    sql = "DELETE FROM mealtimes
-    WHERE id = $1"
-    values = [@id]
-    SqlRunner.run( sql, values )
   end
 
   def self.all()
@@ -45,11 +32,4 @@ class Mealtime
     return result
   end
 
-  def self.find( id )
-    sql = "SELECT * FROM mealtimes WHERE id = $1"
-    values = [id]
-    mealtime = SqlRunner.run( sql, values )
-    result = Mealtime.new( mealtime.first )
-    return result
-  end
 end
