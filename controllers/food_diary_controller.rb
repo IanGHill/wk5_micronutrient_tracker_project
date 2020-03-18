@@ -33,7 +33,7 @@ end
 
 
 post '/food-diary/delete' do
-  # binding.pry
+
   params.each do |food, id|
     consumed_food = ConsumedFood.find(id)
     consumed_food.delete()

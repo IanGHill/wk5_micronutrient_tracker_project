@@ -38,7 +38,8 @@ class NutrientLevel
   end
 
   def name
-    sql = "SELECT nutrients.* FROM nutrient_levels
+    sql = "SELECT nutrients.*
+          FROM nutrient_levels
           INNER JOIN nutrients
           ON nutrients.id = nutrient_levels.nutrients_id
           WHERE nutrient_levels.nutrients_id = $1

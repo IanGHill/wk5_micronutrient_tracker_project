@@ -45,10 +45,10 @@ class Food
 
   def self.find_favourites
     sql = "SELECT foods.*
-            FROM foods
-            INNER JOIN food_types
-            ON foods.food_types_id = food_types.id
-            WHERE food_types.name = 'Favourites'"
+           FROM foods
+           INNER JOIN food_types
+           ON foods.food_types_id = food_types.id
+           WHERE food_types.name = 'Favourites'"
     foods = SqlRunner.run(sql)
     result = foods.map { |food| Food.new( food ) }
     return result
