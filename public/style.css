@@ -96,6 +96,28 @@ th, td {
 
 th {
   text-align: left;
+  color: white;
+}
+
+.button {
+  background-color: white;
+  border-color: green;
+  border: 1px solid;
+  color: forestgreen;
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: forestgreen;
+  border-color: white;
+  border: 1px solid;
+  color: white;
+
 }
 
 .green {
@@ -106,7 +128,7 @@ th {
     text-align: right;
 }
 
-tr:hover { background-color: palegreen;
+tbody tr:hover { background-color: palegreen;
 
 }
 
@@ -130,8 +152,8 @@ table {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
   border: 0;
+  padding: 0;
 }
 
 .flex-container {

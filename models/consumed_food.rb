@@ -155,8 +155,8 @@ class ConsumedFood
                     nutrients.rda,
                     nutrients.uom
            ORDER BY nutrients.id"
-    total_minerals = SqlRunner.run(sql)
-    return total_minerals
+    total_vitamins = SqlRunner.run(sql)
+    return total_vitamins
   end
 
 # resets flag on consumed_foods table once we have grouped items as a favourite meal

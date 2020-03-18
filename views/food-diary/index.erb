@@ -10,16 +10,16 @@
           <% end %>
         </select>
 
-      <label for="food-select">  Select Food:</label>
+      <label for="food-select">Food:</label>
        <select id="food-select" name="foods_id">
          <% @all_foods.each do |food| %>
              <option value=<%= food.id %>><%= food.name %></option>
          <% end %>
        </select>
 
-      <label for="quantity">  Quantity(g)</label>
+      <label for="quantity">Quantity(g)</label>
         <input type="number" id="quantity" name="quantity" placeholder="Enter quantity (g)" required min = 1 >
-      <input type="submit" value="Enter Food">
+      <input type="submit" value="Enter Food" class="button">
     </form>
   </main>
   <aside class="flex-item sidebar"></aside>
@@ -31,14 +31,16 @@
     <form id="delete-food" method="post" action="/food-diary/delete"></form>
     <form id="group-food" method="post" action="/favourite/new"></form>
     <table>
-      <tr>
-        <th class = "green">Mealtime</th>
-        <th class = "green">Food</th>
-        <th class = "green">Type</th>
-        <th class = "green">Quantity</th>
-        <th><input type="submit" value="Delete Selected" form="delete-food"></th>
-        <th><input type="submit" value="Group Selected as meal" form="group-food"></th>
-      </tr>
+      <thead>
+        <tr>
+          <th class = "green">Mealtime</th>
+          <th class = "green">Food</th>
+          <th class = "green">Type</th>
+          <th class = "green">Quantity</th>
+          <th><input type="submit" value="Delete" form="delete-food" class="button"></th>
+          <th><input type="submit" value="Group as favourite" form="group-food" class="button"></th>
+        </tr>
+      </thead>
       <% for food in @all_meals %>
 
       <tr>
