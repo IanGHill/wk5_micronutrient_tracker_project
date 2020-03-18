@@ -1,6 +1,6 @@
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
-  <main class="flex-item main center">
+  <main class="flex-item main center b-top b-bottom b-left b-right">
 
     <div class="center">
       <form method="post" action="/favourite">
@@ -22,7 +22,7 @@
 
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
-  <main class="flex-item main center no-padding-vertical">
+  <main class="flex-item main center no-padding-vertical b-left b-right">
     <h4>Nutritional Data for <strong><%= @selected_fav.name %></strong> (per 100g)</h4>
   </main>
   <aside class="flex-item sidebar"></aside>
@@ -31,7 +31,7 @@
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
   <!-- Nutrition tables show total vitamins & minerals for foods consumed (listed in food diary above) -->
-  <main class="flex-item main-left center">
+  <main class="flex-item main-left center b-bottom b-left">
     <div class="center">
       <table>
         <tr>
@@ -51,7 +51,7 @@
       </table>
     </div>
   </main>
-  <main class="flex-item main-right center">
+  <main class="flex-item main-right center b-bottom b-right">
     <div class="center">
       <table>
         <tr>

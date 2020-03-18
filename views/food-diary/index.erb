@@ -1,6 +1,6 @@
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
-  <main class="flex-item main center">
+  <main class="flex-item main center b-top b-bottom b-left b-right">
 <!-- Form for creating an entry on the Food Diary -->
     <form id="form1" method="post" action="/food-diary">
       <label for="mealtime-select">Select Mealtime:</label>
@@ -26,7 +26,7 @@
 </section>
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
-  <main class="flex-item main center">
+  <main class="flex-item main center b-left b-right">
 <!-- Food Diary displays all foods consumed -->
     <form id="delete-food" method="post" action="/food-diary/delete"></form>
     <form id="group-food" method="post" action="/favourite/new"></form>
@@ -67,7 +67,7 @@
 
 <section class="flex-container">
   <aside class="flex-item sidebar"></aside>
-  <main class="flex-item main-left center">
+  <main class="flex-item main-left center b-top b-bottom b-left">
 <!-- Nutrition tables show total vitamins and minerals for foods consumed (listed in food diary above) -->
     <table>
       <tr>
@@ -86,7 +86,7 @@
       <% end %>
     </table>
   </main>
-  <main class="flex-item main-right center">
+  <main class="flex-item main-right center b-top b-bottom b-right">
     <table>
       <tr>
         <th class = "green">Vitamin</th>

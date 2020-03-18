@@ -131,6 +131,7 @@ table {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  border: 0;
 }
 
 .flex-container {
@@ -144,11 +145,6 @@ table {
   flex: 4;
   padding: 20px;
   background-color: #AFD0BF;
-  border-left: 1px forestgreen;
-  border-right: 1px forestgreen;
-  border-top: 1px;
-  border-bottom: 0px;
-  border-style: solid;
   opacity: 0.9;
 
 }
@@ -157,11 +153,6 @@ table {
   flex: 2;
   padding: 10px;
   background-color: #AFD0BF;
-  border-left: 1px forestgreen;
-  border-right: 0px forestgreen;
-  border-top: 1px;
-  border-bottom: 1px;
-  border-style: solid;
   opacity: 0.9;
 }
 
@@ -169,12 +160,6 @@ table {
   flex: 2;
   padding: 10px;
   background-color: #AFD0BF;
-  justify-content: center;
-  border-left: 0px forestgreen;
-  border-right: 1px forestgreen;
-  border-top: 1px;
-  border-bottom: 1px;
-  border-style: solid;
   opacity: 0.9;
 }
 
@@ -202,4 +187,24 @@ table {
 .no-padding-vertical {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.b-left {
+  border-left: 1px forestgreen;
+  border-style: solid;
+}
+
+.b-right {
+  border-right: 1px forestgreen;
+  border-style: solid;
+}
+
+.b-top {
+  border-top: 1px forestgreen;
+  border-style: solid;
+}
+
+.b-bottom {
+  border-bottom: 1px forestgreen;
+  border-style: solid;
 }
