@@ -3,8 +3,7 @@ require_relative("nutrient")
 
 class Nutrient
 
-  attr_reader :id
-  attr_accessor :name, :rda, :uom, :type
+  attr_reader :id, :name, :rda, :uom, :type
 
   def initialize(options)
     @id = options['id'].to_i if options['id']

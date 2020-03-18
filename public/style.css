@@ -21,9 +21,8 @@ h2 {
   color: #9C7241;
 }
 
-h3 {
+h4 {
   text-align: center;
-  color: #9C7241;
 }
 
 ul {
@@ -200,6 +199,7 @@ table {
   flex: 1;
 }
 
-.justify {
-  padding-left: 300px;
+.no-padding-vertical {
+  padding-top: 0;
+  padding-bottom: 0;
 }

@@ -2,8 +2,7 @@ require_relative("../db/sql_runner")
 
 class NutrientLevel
 
-  attr_reader :id, :foods_id, :nutrients_id
-  attr_accessor :nutrient_level
+  attr_reader :id, :foods_id, :nutrients_id, :nutrient_level
 
   def initialize(options)
     @id = options['id'].to_i if options['id']

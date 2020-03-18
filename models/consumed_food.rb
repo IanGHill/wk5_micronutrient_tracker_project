@@ -8,8 +8,8 @@ require ('pry-byebug')
 
 class ConsumedFood
 
-  attr_reader :id
-  attr_accessor :foods_id, :mealtimes_id, :quantity, :group_as_favourite
+  attr_reader :id, :foods_id, :mealtimes_id, :quantity
+  attr_accessor :group_as_favourite
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
